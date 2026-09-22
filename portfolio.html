@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<!--
+  PORTFOLIO — placeholder content
+  Swap "Mira Chen" / project entries / links / email for your own.
+  Search for [EDIT] comments to find every spot to personalize.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mira Chen — Engineer & Founder</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F3F4F7;
+    --surface: #FFFFFF;
+    --ink: #14151A;
+    --ink-soft: #4A4C57;
+    --muted: #83858F;
+    --line: #E2E4EA;
+    --accent: #6C5CE7;
+    --accent-2: #FF6FA8;
+    --accent-dim: #ECE9FB;
+    --display: 'Fraunces', ui-serif, Georgia, serif;
+    --body: 'Inter', ui-sans-serif, sans-serif;
+    --max: 1080px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  body.has-cursor, body.has-cursor a, body.has-cursor button {
+    cursor: none;
+  }
+
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent); color: #fff; }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  img, svg { display: block; max-width: 100%; }
+
+  .wrap {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- CUSTOM CURSOR ---------- */
+  #cursor {
+    position: fixed;
+    top: 0; left: 0;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    background: var(--ink);
+    pointer-events: none;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    transition: width 0.25s cubic-bezier(.2,.8,.2,1), height 0.25s cubic-bezier(.2,.8,.2,1),
+                background 0.25s ease, opacity 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--body);
+    font-size: 12px;
+    font-weight: 600;
+    color: #fff;
+    opacity: 0;
+  }
+  #cursor.ready { opacity: 1; }
+  #cursor.big {
+    width: 74px; height: 74px;
+    background: var(--ink);
+  }
+  #cursor.big span { opacity: 1; }
+  #cursor span { opacity: 0; transition: opacity 0.15s ease 0.05s; white-space: nowrap; }
+
+  /* ---------- NAV ---------- */
+  header.nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(243, 244, 247, 0.82);
+    backdrop-filter: blur(10px);
+  }
+  .nav-inner {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mark {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 19px;
+    font-style: italic;
+  }
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .nav-links a { position: relative; padding-bottom: 4px; }
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    width: 100%; height: 1px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+  .nav-links a:hover::after { transform: scaleX(1); transform-origin: left; }
+  .nav-links a:hover { color: var(--ink); }
+
+  @media (max-width: 560px) {
+    .nav-links { gap: 18px; font-size: 13px; }
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    padding: 96px 0 120px;
+    overflow: hidden;
+  }
+  .blob {
+    position: absolute;
+    top: -220px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 520px;
+    background: radial-gradient(ellipse 70% 100% at 20% 30%, var(--accent-2) 0%, var(--accent) 45%, transparent 72%),
+                radial-gradient(ellipse 60% 90% at 80% 40%, var(--accent) 0%, var(--accent-2) 40%, transparent 70%);
+    filter: blur(90px);
+    opacity: 0.28;
+    z-index: 0;
+    transition: transform 0.5s cubic-bezier(.2,.8,.2,1);
+    pointer-events: none;
+  }
+  .eyebrow {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  h1.headline {
+    position: relative;
+    z-index: 1;
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(38px, 6.4vw, 74px);
+    line-height: 1.06;
+    letter-spacing: -0.01em;
+    max-width: 15ch;
+  }
+  h1.headline em {
+    font-style: italic;
+    font-weight: 500;
+    color: var(--accent);
+  }
+  .hero-sub {
+    position: relative;
+    z-index: 1;
+    margin-top: 28px;
+    max-width: 46ch;
+    font-size: 18px;
+    color: var(--ink-soft);
+  }
+  .hero-cta {
+    position: relative;
+    z-index: 1;
+    margin-top: 44px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 15px;
+    padding: 15px 26px;
+    border-radius: 100px;
+    transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  }
+  .btn.primary { background: var(--ink); color: #fff; }
+  .btn.primary:hover { background: var(--accent); }
+  .btn.ghost { border: 1px solid var(--line); color: var(--ink); }
+  .btn.ghost:hover { border-color: var(--ink); }
+  .btn-inner { display: inline-block; will-change: transform; }
+
+  /* ---------- SECTION HEADERS ---------- */
+  .section { padding: 88px 0; }
+  .section-head {
+    max-width: 60ch;
+    margin-bottom: 56px;
+  }
+  .section-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(26px, 3.6vw, 40px);
+    line-height: 1.2;
+    margin-top: 14px;
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.7s cubic-bezier(.2,.8,.2,1), transform 0.7s cubic-bezier(.2,.8,.2,1);
+  }
+  .reveal.in-view { opacity: 1; transform: translateY(0); }
+
+  /* ---------- WORK GRID ---------- */
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .card {
+    position: relative;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 36px;
+    overflow: hidden;
+    isolation: isolate;
+    perspective: 800px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .card:hover { box-shadow: 0 24px 48px -24px rgba(20, 21, 26, 0.18); border-color: transparent; }
+  .card-inner {
+    position: relative;
+    z-index: 1;
+    background: var(--surface);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translateZ(0) rotateX(0) rotateY(0);
+    transition: transform 0.2s ease-out;
+    will-change: transform;
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+  }
+  .card-tag {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: 100px;
+    background: var(--accent-dim);
+    color: var(--accent);
+  }
+  .card-tag.muted { background: var(--bg); color: var(--muted); }
+  .card-year { font-size: 13px; color: var(--muted); }
+  .card-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 26px;
+    margin-bottom: 12px;
+  }
+  .card-desc {
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-bottom: 24px;
+  }
+  .card-stack {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .card-stack span {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--bg);
+    padding: 5px 11px;
+    border-radius: 100px;
+  }
+
+  .card.wide { grid-column: 1 / -1; }
+
+  @media (max-width: 780px) {
+    .work-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .about-lead {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: clamp(24px, 3vw, 32px);
+    line-height: 1.35;
+    margin-bottom: 26px;
+  }
+  .about-body p {
+    color: var(--ink-soft);
+    font-size: 16px;
+    margin-bottom: 16px;
+    max-width: 52ch;
+  }
+  .facts {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .fact {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 15px;
+  }
+  .fact:first-child { padding-top: 0; }
+  .fact dt { color: var(--muted); }
+  .fact dd { color: var(--ink); font-weight: 500; text-align: right; }
+
+  @media (max-width: 780px) {
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  /* ---------- CONTACT ---------- */
+  .contact {
+    text-align: center;
+    padding: 120px 0 100px;
+  }
+  .contact-title {
+    font-family: var(--display);
+    font-weight: 500;
+    font-style: italic;
+    font-size: clamp(36px, 7vw, 76px);
+    line-height: 1.05;
+    max-width: 16ch;
+    margin: 0 auto 40px;
+  }
+  .contact .btn.primary {
+    font-size: 17px;
+    padding: 18px 34px;
+  }
+  .socials {
+    margin-top: 56px;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink-soft);
+  }
+  .socials a:hover { color: var(--accent); }
+
+  footer.foot {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 32px 32px 48px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+  }
+
+  @media (max-width: 560px) {
+    .section { padding: 64px 0; }
+    .hero { padding: 64px 0 80px; }
+    .card { padding: 28px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    #cursor, .blob, .btn-inner, .card-inner, .reveal { transition: none !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor"><span>View</span></div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <!-- [EDIT] initials / mark -->
+    <div class="mark">Mira Chen</div>
+    <nav class="nav-links">
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ---------- HERO ---------- -->
+  <section class="hero">
+    <div class="blob" id="blob"></div>
+    <div class="wrap hero-content">
+      <div class="eyebrow">Engineer & Founder</div>
+      <!-- [EDIT] headline -->
+      <h1 class="headline">Building <em>products</em> people didn't know they needed.</h1>
+      <p class="hero-sub">Ten years writing backend systems and starting companies around them. Currently building developer tools at Cursorline, from San Francisco.</p>
+      <div class="hero-cta">
+        <a href="#work" class="btn primary" data-magnetic data-cursor="View"><span class="btn-inner">See the work</span></a>
+        <a href="#contact" class="btn ghost" data-magnetic data-cursor="Say hi">Say hello</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- WORK ---------- -->
+  <section class="section wrap" id="work">
+    <div class="section-head reveal">
+      <div class="eyebrow">Selected work</div>
+      <h2 class="section-title">Three things I've built, and what I learned from each.</h2>
+    </div>
+
+    <div class="work-grid">
+      <!-- [EDIT] project cards -->
+      <div class="card reveal tilt" data-cursor="View">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag">Active</span>
+            <span class="card-year">2024 — now</span>
+          </div>
+          <div class="card-title">Cursorline</div>
+          <p class="card-desc">Founding engineer building a code review copilot for small teams. I own the review-diffing engine and the pricing model.</p>
+          <div class="card-stack"><span>TypeScript</span><span>Rust</span><span>Postgres</span></div>
+        </div>
+      </div>
+
+      <div class="card reveal tilt" data-cursor="View">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag muted">Acquired</span>
+            <span class="card-year">2022 — 2024</span>
+          </div>
+          <div class="card-title">Northline</div>
+          <p class="card-desc">Co-founded a routing platform for last-mile delivery fleets. Grew to 40 cities before an acquisition.</p>
+          <div class="card-stack"><span>Python</span><span>Go</span><span>PostGIS</span></div>
+        </div>
+      </div>
+
+      <div class="card wide reveal tilt" data-cursor="View">
+        <div class="card-inner">
+          <div class="card-top">
+            <span class="card-tag muted">Shipped</span>
+            <span class="card-year">2020 — 2022</span>
+          </div>
+          <div class="card-title">Stripe — Billing infrastructure</div>
+          <p class="card-desc">Backend engineer on the billing infra team. Shipped usage-based pricing for the API platform, now used by thousands of accounts.</p>
+          <div class="card-stack"><span>Ruby</span><span>Go</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ---------- ABOUT ---------- -->
+  <section class="section wrap" id="about">
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="eyebrow">About</div>
+        <!-- [EDIT] bio -->
+        <p class="about-lead">I like problems where the technical constraint and the business constraint are the same problem.</p>
+        <div class="about-body">
+          <p>Most of what I've built started as a script that fixed my own annoyance, then grew into something other people wanted to pay for. I write code most days and specs the rest — equally happy debugging a race condition or a pricing page.</p>
+          <p>Outside of work: bad chess, good coffee, and a running list of ideas I probably won't get to.</p>
+        </div>
+      </div>
+      <dl class="facts reveal">
+        <div class="fact"><dt>Based in</dt><dd>San Francisco, CA</dd></div>
+        <div class="fact"><dt>Currently</dt><dd>Building Cursorline</dd></div>
+        <div class="fact"><dt>Previously</dt><dd>Stripe, Northline</dd></div>
+        <div class="fact"><dt>Focus</dt><dd>Dev tools, infra, 0→1</dd></div>
+        <div class="fact"><dt>Stack</dt><dd>TypeScript, Rust, Go</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ---------- CONTACT ---------- -->
+  <section class="contact wrap reveal" id="contact">
+    <div class="eyebrow">Get in touch</div>
+    <!-- [EDIT] contact headline -->
+    <h2 class="contact-title">Let's build something.</h2>
+    <a href="mailto:mira@cursorline.dev" class="btn primary" data-magnetic data-cursor="Email"><span class="btn-inner">mira@cursorline.dev</span></a>
+    <div class="socials">
+      <!-- [EDIT] social links -->
+      <a href="#" data-cursor="Open">GitHub</a>
+      <a href="#" data-cursor="Open">X / Twitter</a>
+      <a href="#" data-cursor="Open">LinkedIn</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <span>© 2026 Mira Chen</span>
+  <span>Designed & built by hand</span>
+</footer>
+
+<script>
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(pointer: fine)').matches;
+
+  /* ---------- custom cursor ---------- */
+  if (fine && !reduced) {
+    document.body.classList.add('has-cursor');
+    var cursor = document.getElementById('cursor');
+    var cx = 0, cy = 0, mx = 0, my = 0;
+    window.addEventListener('mousemove', function (e) {
+      mx = e.clientX; my = e.clientY;
+      cursor.classList.add('ready');
+    });
+    function loop() {
+      cx += (mx - cx) * 0.2;
+      cy += (my - cy) * 0.2;
+      cursor.style.transform = 'translate(' + cx + 'px,' + cy + 'px) translate(-50%,-50%)';
+      requestAnimationFrame(loop);
+    }
+    loop();
+
+    var hoverables = document.querySelectorAll('[data-cursor]');
+    hoverables.forEach(function (el) {
+      el.addEventListener('mouseenter', function () {
+        cursor.classList.add('big');
+        cursor.querySelector('span').textContent = el.getAttribute('data-cursor');
+      });
+      el.addEventListener('mouseleave', function () {
+        cursor.classList.remove('big');
+      });
+    });
+  }
+
+  /* ---------- hero blob follows cursor, gently ---------- */
+  if (!reduced) {
+    var blob = document.getElementById('blob');
+    var hero = document.querySelector('.hero');
+    hero.addEventListener('mousemove', function (e) {
+      var r = hero.getBoundingClientRect();
+      var relX = (e.clientX - r.left) / r.width - 0.5;
+      var relY = (e.clientY - r.top) / r.height - 0.5;
+      blob.style.transform = 'translate(' + (relX * 24) + 'px,' + (relY * 30) + 'px)';
+    });
+  }
+
+  /* ---------- magnetic buttons ---------- */
+  if (fine && !reduced) {
+    document.querySelectorAll('[data-magnetic]').forEach(function (btn) {
+      var inner = btn.querySelector('.btn-inner') || btn;
+      btn.addEventListener('mousemove', function (e) {
+        var r = btn.getBoundingClientRect();
+        var x = e.clientX - r.left - r.width / 2;
+        var y = e.clientY - r.top - r.height / 2;
+        inner.style.transform = 'translate(' + (x * 0.25) + 'px,' + (y * 0.4) + 'px)';
+      });
+      btn.addEventListener('mouseleave', function () {
+        inner.style.transform = 'translate(0,0)';
+      });
+    });
+  }
+
+  /* ---------- 3D tilt on project cards ---------- */
+  if (fine && !reduced) {
+    document.querySelectorAll('.tilt').forEach(function (card) {
+      var inner = card.querySelector('.card-inner');
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var relX = (e.clientX - r.left) / r.width - 0.5;
+        var relY = (e.clientY - r.top) / r.height - 0.5;
+        inner.style.transform = 'translateZ(0) rotateY(' + (relX * 5) + 'deg) rotateX(' + (relY * -5) + 'deg)';
+      });
+      card.addEventListener('mouseleave', function () {
+        inner.style.transform = 'translateZ(0) rotateY(0) rotateX(0)';
+      });
+    });
+  }
+
+  /* ---------- scroll reveal ---------- */
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+})();
+</script>
+
+</body>
+</html>

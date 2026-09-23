@@ -32,7 +32,7 @@ function closeProject() {
           <div class="featured-card__media">
             <img
               v-if="project.bannerPhoto || project.coverPhoto"
-              :src="project.bannerPhoto || project.coverPhoto"
+              :src="withBase(project.bannerPhoto || project.coverPhoto)"
               :alt="`${project.name} project preview`"
               loading="lazy"
             >
@@ -59,7 +59,7 @@ function closeProject() {
 
         <img
           v-if="selectedProject.bannerPhoto || selectedProject.coverPhoto"
-          :src="selectedProject.bannerPhoto || selectedProject.coverPhoto"
+          :src="withBase(selectedProject.bannerPhoto || selectedProject.coverPhoto)"
           :alt="`${selectedProject.name} project preview`"
           class="project-modal__image"
         >

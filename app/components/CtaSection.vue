@@ -8,7 +8,7 @@ import { ctaContent } from '~/data/content'
       <div class="eyebrow">{{ ctaContent.eyebrow }}</div>
       <h2 class="cta-band__title">{{ ctaContent.title }}</h2>
       <p class="cta-band__text">{{ ctaContent.text }}</p>
-      <a href="/contact" class="target-button cta-band__button" data-magnetic>
+      <a :href="withBase('/contact')" class="target-button cta-band__button" data-magnetic>
         <span class="btn-inner">{{ ctaContent.button }}</span>
       </a>
     </div>

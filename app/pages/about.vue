@@ -30,7 +30,7 @@ onMounted(() => {
             <div class="about-page__intro">
               <p>{{ profile.summary }}</p>
               <p>{{ aboutPageContent.introSecondParagraph }}</p>
-              <a href="/contact" class="target-button button-dark">{{ aboutPageContent.contactCta }}</a>
+              <a :href="withBase('/contact')" class="target-button button-dark">{{ aboutPageContent.contactCta }}</a>
             </div>
           </div>
 
@@ -38,7 +38,7 @@ onMounted(() => {
             <figure class="about-page__portrait">
               <img
                 ref="portraitEl"
-                :src="profile.photo"
+                :src="withBase(profile.photo)"
                 :alt="profile.photoAlt"
                 width="720"
                 height="900"

@@ -13,8 +13,8 @@ const firstName = profile.name.split(' ')[0]
       <h1 class="hero-title">{{ heroContent.titleBefore }} <em>{{ heroContent.titleEmphasis }}</em> {{ heroContent.titleAfter }}</h1>
       <p class="hero-subtitle">{{ heroContent.subtitle }}</p>
       <div class="hero-actions">
-        <a href="/about" class="target-button button-dark" data-magnetic><span class="btn-inner">{{ heroContent.aboutmeCta }}</span></a>
-        <a href="/contact" class="target-button button-ghost" data-magnetic><span class="btn-inner">{{ heroContent.contactCta }}</span></a>
+        <a :href="withBase('/about')" class="target-button button-dark" data-magnetic><span class="btn-inner">{{ heroContent.aboutmeCta }}</span></a>
+        <a :href="withBase('/contact')" class="target-button button-ghost" data-magnetic><span class="btn-inner">{{ heroContent.contactCta }}</span></a>
       </div>
     </div>
   </section>

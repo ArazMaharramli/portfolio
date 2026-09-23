@@ -12,6 +12,11 @@ export default defineNuxtConfig({
     name: 'Araz Solutions'
   },
   app: {
+    // GitHub Pages project site lives at https://arazmaharramli.github.io/portfolio/,
+    // so every asset/link must be prefixed. This must be `app.baseURL`:
+    // Nuxt 4 ignores the legacy `router.base` that actions/configure-pages injects.
+    // Change to '/' if the site ever moves to a custom domain root.
+    baseURL: '/portfolio/',
     head: {
       title: 'I\'m Araz | Software Engineer',
       meta: [

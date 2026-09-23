@@ -32,7 +32,7 @@ onBeforeUnmount(() => {
     <div class="site-nav__inner">
       <NuxtLink to="/" class="site-mark">{{ profile.name }}</NuxtLink>
       <nav class="site-nav__links">
-        <a v-for="link in links" :key="link.href" :href="link.href">{{ link.label }}</a>
+        <a v-for="link in links" :key="link.href" :href="withBase(link.href)">{{ link.label }}</a>
       </nav>
     </div>
   </header>

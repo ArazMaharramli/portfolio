@@ -28,7 +28,7 @@ function openProject() {
         <img
           v-if="project.coverPhoto"
           class="project-card__image"
-          :src="project.coverPhoto"
+          :src="withBase(project.coverPhoto)"
           :alt="`${project.name} project preview`"
           loading="lazy"
         >

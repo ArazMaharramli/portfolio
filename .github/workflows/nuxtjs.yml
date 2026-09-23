@@ -55,12 +55,16 @@ jobs:
           cache: ${{ steps.detect-package-manager.outputs.manager }}
       - name: Setup Pages
         uses: actions/configure-pages@v5
-        with:
-          # Automatically inject router.base in your Nuxt configuration file and set
-          # target to static (https://nuxtjs.org/docs/configuration-glossary/configuration-target/).
-          #
-          # You may remove this line if you want to manage the configuration yourself.
-          static_site_generator: nuxt
+        # Do NOT pass `static_site_generator: nuxt` here.
+        #
+        # That input makes the action inject Nuxt 2 era settings into a config file.
+        # It resolves the config path to `nuxt.config.js`, does not find one, and
+        # writes a BLANK `nuxt.config.js` (its bundled fallback is `export default {}`).
+        # Nuxt prefers that .js file over our `nuxt.config.ts`, so the whole config
+        # (Tailwind module, global CSS, app.head, app.baseURL) is silently dropped and
+        # the deployed site is unstyled with 404ing assets.
+        #
+        # The base path is managed in nuxt.config.ts via `app.baseURL` instead.
       - name: Restore cache
         uses: actions/cache@v4
         with:
